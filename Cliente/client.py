@@ -1,4 +1,4 @@
-import upload
+import Cliente.upload as upload
 
 def main():
     entrada = input("Ingrese el comando que desea ejecutar: ")

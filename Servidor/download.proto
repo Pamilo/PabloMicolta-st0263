@@ -1,0 +1,16 @@
+syntax = "proto3";
+service  Download{
+  rpc finishDownload (downloadRequest) returns (downloadReply) {}
+  rpc continueDownload (downloadRequest) returns () {}
+}
+
+message downloadRequest {
+  string name = 1;
+  string ip = 2;
+  string port = 3;
+}
+
+message downloadReply {
+  string message = 1;
+  string ip = 2;
+}

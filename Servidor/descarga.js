@@ -1,24 +1,100 @@
-#include <iostream>
-#include <string>
+/*const grpc = require('@grpc/grpc-js');
+const protoLoader = require('@grpc/proto-loader');
+const _ = require('lodash');
+const async = require('async');
+const fs = require('fs');
+const path = require('path');
 
-std::string mensaje(){
-    std::string mensaje = "Se logro descargar el archivo";
-    return mensaje;
+// Load the Protocol Buffer definition from the .proto file
+const PROTO_PATH = path.join(__dirname, './download.proto');
+const packageDefinition = protoLoader.loadSync(PROTO_PATH);
+const downloadProto = grpc.loadPackageDefinition(packageDefinition).example;
+
+
+const Server = new downloadProto.OtherServer('other_server_address:50052', grpc.credentials.createInsecure());
+const Server2 = new exampleProto.Greeter('server2_address:50052', grpc.credentials.createInsecure());
+
+/*const packageDefinition = protoLoader.loadSync(PROTO_PATH, {
+    keepCase: true,
+    longs: String,
+    enums: String,
+    defaults: true,
+    oneofs: true
+});*/
+
+/*const client = new productService(REMOTE_HOST,grpc.credentials.createInsecure());
+
+// Aqui van las Funcionesc
+const continueDownload = (call,callback)=>{
+  callback(null,{message: 'Se logro encontrar el archivo' + call.request.name});
 }
 
-void busqueda(){
-//COSAS DE COMUNICACION_____
-    //jsnon
-    //consulta la lista de archivos 
-    //determina si esta en la lista 
-    //devuelve el resultado
-}
+const server = new grpc.Server();
 
+// Add service and methods to the server
+server.addService(exampleProto.Greeter.service, {
+  finishDownload: sayHello,
+  continueDownload: continueDownload,
+});
 
-void descarga(){
-/*
-inicia el proceso/recibe el mensaje 
-manda a realizar la busqueda
-obtener los datos para mandar las cosas
-*/
-}
+// Start the server
+server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), (err, port) => {
+  if (err) {
+    console.error('Failed to start server.', err);
+  } else {
+    console.log('Server started successfully, listening on port ' + port);
+    server.start();
+  }
+});*/
+
+const grpc = require('@grpc/grpc-js');
+const protoLoader = require('@grpc/proto-loader');
+const path = require('path');
+
+// Cargar el proto file
+const PROTO_PATH = path.join(__dirname, 'example.proto');
+const packageDefinition = protoLoader.loadSync(PROTO_PATH);
+const exampleProto = grpc.loadPackageDefinition(packageDefinition).example;
+
+// crear el cliente para serv al cual se va a cuentionar
+const otherServerClient = new exampleProto.Download('other_server_address:50052', grpc.credentials.createInsecure());
+
+const finishDownload = (call, callback) => {
+  // Implement logic for finishDownload method
+
+  callback(null, { message: 'Descargado ' + call.request.name + ' desde ' /*+  aqui va la ip del equipo*/});
+};
+
+const continueDownload = (call, callback) => {
+
+  // Call a method on the other server
+  otherServerClient.finishDownload({ /* aqui va la IP y nombre*/ }, (err, response) => {
+    if (err) {
+      console.error('Error llamando otro server:', err);
+      callback(err);
+    } else {
+      console.log('Response from other server:', response);
+      // Process response if needed
+      callback();
+    }
+  });
+};
+
+// Create a gRPC server
+const server = new grpc.Server();
+
+// Add service and methods to the server
+server.addService(exampleProto.Download.service, {
+  finishDownload: finishDownload,
+  continueDownload: continueDownload,
+});
+
+// Start the server
+server.bindAsync('0.0.0.0:50051', grpc.ServerCredentials.createInsecure(), (err, port) => {
+  if (err) {
+    console.error('Failed to start server.', err);
+  } else {
+    console.log('Server started successfully, listening on port ' + port);
+    server.start();
+  }
+});
