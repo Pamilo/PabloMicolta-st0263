@@ -52,32 +52,16 @@ const protoLoader = require('@grpc/proto-loader');
 const path = require('path');
 
 // Cargar el proto file
-const PROTO_PATH = path.join(__dirname, 'example.proto');
+const PROTO_PATH = path.join(__dirname, 'download.proto');
 const packageDefinition = protoLoader.loadSync(PROTO_PATH);
 const exampleProto = grpc.loadPackageDefinition(packageDefinition).example;
 
 // crear el cliente para serv al cual se va a cuentionar
-const otherServerClient = new exampleProto.Download('other_server_address:50052', grpc.credentials.createInsecure());
 
 const finishDownload = (call, callback) => {
   // Implement logic for finishDownload method
 
   callback(null, { message: 'Descargado ' + call.request.name + ' desde ' /*+  aqui va la ip del equipo*/});
-};
-
-const continueDownload = (call, callback) => {
-
-  // Call a method on the other server
-  otherServerClient.finishDownload({ /* aqui va la IP y nombre*/ }, (err, response) => {
-    if (err) {
-      console.error('Error llamando otro server:', err);
-      callback(err);
-    } else {
-      console.log('Response from other server:', response);
-      // Process response if needed
-      callback();
-    }
-  });
 };
 
 // Create a gRPC server
@@ -86,7 +70,6 @@ const server = new grpc.Server();
 // Add service and methods to the server
 server.addService(exampleProto.Download.service, {
   finishDownload: finishDownload,
-  continueDownload: continueDownload,
 });
 
 // Start the server
