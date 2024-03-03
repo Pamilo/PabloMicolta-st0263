@@ -1,7 +1,10 @@
 import shutil
-
-def cargar(fuente, fileName):
+import os
+def cargar(fileName):
     destino = 'files/'+fileName
+    with open(fileName, 'w') as fp:
+        pass
+    fuente = fileName
     try:
         shutil.copyfile(fuente, destino)
         print("File copied successfully!")
@@ -12,14 +15,8 @@ def cargar(fuente, fileName):
     except Exception as e:
         print("An error occurred:", e)
     
+    os.remove(fuente) 
 
-import os
 
-def list_files():
-    files = []
-    for root, _, filenames in os.walk('files'):
-        for filename in filenames:
-            files.append(filename)
-    return files
 
-files = list_files()
+
