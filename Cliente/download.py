@@ -7,10 +7,13 @@ import grpc
 import download_pb2
 import download_pb2_grpc
 
+import requests
+
 
 def run():
-    print("Will try to greet world ...")
-    with grpc.insecure_channel("0.0.0.0:50051") as channel:
+    #data = {'method': 'download'}
+    #response = requests.post('http://localhost:3000/api/data', json=data)
+    with grpc.insecure_channel(response.ip + ":50051") as channel:
         nombreArchivo = input("Entre el nombre del archivo (notar que debe tener la terminacion(jpg, mp3,txt,etc)): ")
         stub = download_pb2_grpc.Stub(channel)
         response = stub.startDownload(download_pb2.downloadRequest(name=nombreArchivo))
