@@ -2,12 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const grpc = require('@grpc/grpc-js');
 const protoLoader = require('@grpc/proto-loader');
-const path = require('path');
+
 
 // Cargar el proto file
 const PROTO_PATH = path.join(__dirname, 'search.proto');
 const packageDefinition = protoLoader.loadSync(PROTO_PATH);
-const Proto = grpc.loadPackageDefinition(packageDefinition).search;
+const searchProto = grpc.loadPackageDefinition(packageDefinition).search;
 // Path to your local repository directory
 const repositoryPath = 'files';
  // Replace with your input file name
@@ -40,7 +40,7 @@ const realizarBusqueda=(call,callback)=>{
 // Read the contents of the directory
 const server = new grpc.Server();
 // Add service and methods to the server
-server.addService(exampleProto.Download.service, {
+server.addService(searchProto.Search.service, {
     realizarBusqueda: realizarBusqueda,
   });
   

@@ -14,17 +14,17 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0csearch.proto\x12\x06search\"9\n\x0f\x64ownloadRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\t\",\n\rdownloadReply\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t2M\n\x08\x44ownload\x12\x41\n\rstartDownload\x12\x17.search.downloadRequest\x1a\x15.search.downloadReply\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0csearch.proto\x12\x06search\"7\n\rsearchRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\t\"*\n\x0bsearchReply\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t2E\n\x06Search\x12;\n\x0bstartSearch\x12\x15.search.searchRequest\x1a\x13.search.searchReply\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'search_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
-  _globals['_DOWNLOADREQUEST']._serialized_start=24
-  _globals['_DOWNLOADREQUEST']._serialized_end=81
-  _globals['_DOWNLOADREPLY']._serialized_start=83
-  _globals['_DOWNLOADREPLY']._serialized_end=127
-  _globals['_DOWNLOAD']._serialized_start=129
-  _globals['_DOWNLOAD']._serialized_end=206
+  _globals['_SEARCHREQUEST']._serialized_start=24
+  _globals['_SEARCHREQUEST']._serialized_end=79
+  _globals['_SEARCHREPLY']._serialized_start=81
+  _globals['_SEARCHREPLY']._serialized_end=123
+  _globals['_SEARCH']._serialized_start=125
+  _globals['_SEARCH']._serialized_end=194
 # @@protoc_insertion_point(module_scope)

@@ -5,7 +5,7 @@ import grpc
 import search_pb2 as search__pb2
 
 
-class DownloadStub(object):
+class SearchStub(object):
     """Missing associated documentation comment in .proto file."""
 
     def __init__(self, channel):
@@ -14,42 +14,42 @@ class DownloadStub(object):
         Args:
             channel: A grpc.Channel.
         """
-        self.startDownload = channel.unary_unary(
-                '/search.Download/startDownload',
-                request_serializer=search__pb2.downloadRequest.SerializeToString,
-                response_deserializer=search__pb2.downloadReply.FromString,
+        self.startSearch = channel.unary_unary(
+                '/search.Search/startSearch',
+                request_serializer=search__pb2.searchRequest.SerializeToString,
+                response_deserializer=search__pb2.searchReply.FromString,
                 )
 
 
-class DownloadServicer(object):
+class SearchServicer(object):
     """Missing associated documentation comment in .proto file."""
 
-    def startDownload(self, request, context):
+    def startSearch(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
         raise NotImplementedError('Method not implemented!')
 
 
-def add_DownloadServicer_to_server(servicer, server):
+def add_SearchServicer_to_server(servicer, server):
     rpc_method_handlers = {
-            'startDownload': grpc.unary_unary_rpc_method_handler(
-                    servicer.startDownload,
-                    request_deserializer=search__pb2.downloadRequest.FromString,
-                    response_serializer=search__pb2.downloadReply.SerializeToString,
+            'startSearch': grpc.unary_unary_rpc_method_handler(
+                    servicer.startSearch,
+                    request_deserializer=search__pb2.searchRequest.FromString,
+                    response_serializer=search__pb2.searchReply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'search.Download', rpc_method_handlers)
+            'search.Search', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
  # This class is part of an EXPERIMENTAL API.
-class Download(object):
+class Search(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
-    def startDownload(request,
+    def startSearch(request,
             target,
             options=(),
             channel_credentials=None,
@@ -59,8 +59,8 @@ class Download(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/search.Download/startDownload',
-            search__pb2.downloadRequest.SerializeToString,
-            search__pb2.downloadReply.FromString,
+        return grpc.experimental.unary_unary(request, target, '/search.Search/startSearch',
+            search__pb2.searchRequest.SerializeToString,
+            search__pb2.searchReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

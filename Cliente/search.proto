@@ -1,16 +1,16 @@
 syntax = "proto3";
 package search;
-service  Download{
-  rpc startDownload (downloadRequest) returns (downloadReply) {}
+service  Search{
+  rpc startSearch (searchRequest) returns (searchReply) {}
 }
 
-message downloadRequest {
+message searchRequest {
   string name = 1;
   string ip = 2;
   string port = 3;
 }
 
-message downloadReply {
+message searchReply {
   string message = 1;
   string ip = 2;
 }

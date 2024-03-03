@@ -4,7 +4,7 @@ from typing import ClassVar as _ClassVar, Optional as _Optional
 
 DESCRIPTOR: _descriptor.FileDescriptor
 
-class downloadRequest(_message.Message):
+class searchRequest(_message.Message):
     __slots__ = ("name", "ip", "port")
     NAME_FIELD_NUMBER: _ClassVar[int]
     IP_FIELD_NUMBER: _ClassVar[int]
@@ -14,7 +14,7 @@ class downloadRequest(_message.Message):
     port: str
     def __init__(self, name: _Optional[str] = ..., ip: _Optional[str] = ..., port: _Optional[str] = ...) -> None: ...
 
-class downloadReply(_message.Message):
+class searchReply(_message.Message):
     __slots__ = ("message", "ip")
     MESSAGE_FIELD_NUMBER: _ClassVar[int]
     IP_FIELD_NUMBER: _ClassVar[int]

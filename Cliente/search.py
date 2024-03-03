@@ -12,10 +12,10 @@ import requests
 def run():
     #data = {'method': 'download'}
     #response = requests.post('http://localhost:3000/api/data', json=data)
-    with grpc.insecure_channel(response.ip + ":50051") as channel:
+    with grpc.insecure_channel("127.0.0.1" + ":50051") as channel:
         nombreArchivo = input("Entre el nombre del archivo (notar que debe tener la terminacion(jpg, mp3,txt,etc)): ")
-        stub = search_pb2_grpc.Stub(channel)
-        response = stub.startDownload(search_pb2.downloadRequest(name=nombreArchivo))
+        stub = search_pb2_grpc.SearchStub(channel)
+        response = stub.startSearch(search_pb2.searchRequest(name=nombreArchivo))
     print(response.message)
 
 
