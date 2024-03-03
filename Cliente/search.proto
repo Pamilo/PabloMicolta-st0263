@@ -1,4 +1,5 @@
 syntax = "proto3";
+package search;
 service  Download{
   rpc startDownload (downloadRequest) returns (downloadReply) {}
 }

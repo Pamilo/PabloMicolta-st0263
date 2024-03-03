@@ -5,7 +5,7 @@ const path = require('path');
 // Cargar el proto file
 const PROTO_PATH = path.join(__dirname, 'download.proto');
 const packageDefinition = protoLoader.loadSync(PROTO_PATH);
-const dowloadProto = grpc.loadPackageDefinition(packageDefinition).example;
+const Proto = grpc.loadPackageDefinition(packageDefinition).download;
 
 // crear el cliente para serv al cual se va a cuentionar
 

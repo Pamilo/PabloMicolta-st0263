@@ -2,7 +2,7 @@
 """Client and server classes corresponding to protobuf-defined services."""
 import grpc
 
-from Cliente import download_pb2 as Cliente_dot_download__pb2
+import search_pb2 as search__pb2
 
 
 class DownloadStub(object):
@@ -15,9 +15,9 @@ class DownloadStub(object):
             channel: A grpc.Channel.
         """
         self.startDownload = channel.unary_unary(
-                '/Download/startDownload',
-                request_serializer=Cliente_dot_download__pb2.downloadRequest.SerializeToString,
-                response_deserializer=Cliente_dot_download__pb2.downloadReply.FromString,
+                '/search.Download/startDownload',
+                request_serializer=search__pb2.downloadRequest.SerializeToString,
+                response_deserializer=search__pb2.downloadReply.FromString,
                 )
 
 
@@ -35,12 +35,12 @@ def add_DownloadServicer_to_server(servicer, server):
     rpc_method_handlers = {
             'startDownload': grpc.unary_unary_rpc_method_handler(
                     servicer.startDownload,
-                    request_deserializer=Cliente_dot_download__pb2.downloadRequest.FromString,
-                    response_serializer=Cliente_dot_download__pb2.downloadReply.SerializeToString,
+                    request_deserializer=search__pb2.downloadRequest.FromString,
+                    response_serializer=search__pb2.downloadReply.SerializeToString,
             ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-            'Download', rpc_method_handlers)
+            'search.Download', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
@@ -59,8 +59,8 @@ class Download(object):
             wait_for_ready=None,
             timeout=None,
             metadata=None):
-        return grpc.experimental.unary_unary(request, target, '/Download/startDownload',
-            Cliente_dot_download__pb2.downloadRequest.SerializeToString,
-            Cliente_dot_download__pb2.downloadReply.FromString,
+        return grpc.experimental.unary_unary(request, target, '/search.Download/startDownload',
+            search__pb2.downloadRequest.SerializeToString,
+            search__pb2.downloadReply.FromString,
             options, channel_credentials,
             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)

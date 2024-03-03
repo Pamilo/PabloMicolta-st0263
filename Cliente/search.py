@@ -1,22 +1,24 @@
-from http.server import BaseHTTPRequestHandler, HTTPServer
-import json
 
-class RequestHandler(BaseHTTPRequestHandler):
-    def do_POST(self):
-        content_length = int(self.headers['Content-Length'])
-        post_data = self.rfile.read(content_length)
-        data = json.loads(post_data.decode('utf-8'))
-        self.send_response(200)
-        self.send_header('Content-type', 'application/json')
-        self.end_headers()
-        response = {'ip': 'aqui va la respuesta de la busqueda'}
-        self.wfile.write(json.dumps(response).encode('utf-8'))
+from __future__ import print_function
 
-def run(server_class=HTTPServer, handler_class=RequestHandler, port=8000):
-    server_address = ('localhost', port)
-    httpd = server_class(server_address, handler_class)
-    print(f'Starting server on port {port}...')
-    httpd.serve_forever()
+import logging
 
-if __name__ == '__main__':
+import grpc
+import search_pb2
+import search_pb2_grpc
+
+import requests
+
+def run():
+    #data = {'method': 'download'}
+    #response = requests.post('http://localhost:3000/api/data', json=data)
+    with grpc.insecure_channel(response.ip + ":50051") as channel:
+        nombreArchivo = input("Entre el nombre del archivo (notar que debe tener la terminacion(jpg, mp3,txt,etc)): ")
+        stub = search_pb2_grpc.Stub(channel)
+        response = stub.startDownload(search_pb2.downloadRequest(name=nombreArchivo))
+    print(response.message)
+
+
+if __name__ == "__main__":
+    logging.basicConfig()
     run()
