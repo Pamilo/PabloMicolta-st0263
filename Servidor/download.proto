@@ -1,7 +1,7 @@
 syntax = "proto3";
+package download
 service  Download{
   rpc finishDownload (downloadRequest) returns (downloadReply) {}
-  rpc continueDownload (downloadRequest) returns () {}
 }
 
 message downloadRequest {
