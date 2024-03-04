@@ -1,25 +1,31 @@
-
-from __future__ import print_function
-
-import logging
-
-import grpc
-import download_pb2
-import download_pb2_grpc
-
 import requests
+import json
+import pika
 
+connection = pika.BlockingConnection(pika.ConnectionParameters('127.0.0.1', 5672, '/',
+pika.PlainCredentials('user', 'password')))
+channel = connection.channel()
+nombreArchivo = 'ejemplo'
+params = {'ip':'127.0.0.1','archivo':nombreArchivo}
+channel.basic_publish(exchange='my_exchange', routing_key='test', body=params)
+print("Runnning Producer Application...")
 
-def run():
-    #data = {'method': 'download'}
-    #response = requests.post('http://localhost:3000/api/data', json=data)
-    with grpc.insecure_channel(response.ip + ":50051") as channel:
-        nombreArchivo = input("Entre el nombre del archivo (notar que debe tener la terminacion(jpg, mp3,txt,etc)): ")
-        stub = download_pb2_grpc.Stub(channel)
-        response = stub.startDownload(download_pb2.downloadRequest(name=nombreArchivo))
-    print(response.message)
+connection.close()
 
+def send_request():
+    url = 'http://localhost:8000'  # Replace with the actual server URL
+    data = {'key': 'value'}  # Replace with the data you want to send in the request
 
-if __name__ == "__main__":
-    logging.basicConfig()
-    run()
+    # Send POST request to the server
+    response = requests.post(url, json=data)
+
+    # Check if the request was successful (status code 200)
+    if response.status_code == 200:
+        # Decode and print the response from the server
+        response_data = json.loads(response.content)
+        print("Response from server:", response_data["ip"])
+    else:
+        print("Error:", response.status_code)
+
+if __name__ == '__main__':
+    send_request()

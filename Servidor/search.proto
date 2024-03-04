@@ -1,7 +1,7 @@
 syntax = "proto3";
 package search;
 service  Search{
-  rpc realizarBusqueda(searchRequest) returns (searchReply) {}
+  rpc startSearch (searchRequest) returns (searchReply) {}
 }
 
 message searchRequest {

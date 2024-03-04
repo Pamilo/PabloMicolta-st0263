@@ -1,3 +1,5 @@
 ip = 127.0.0.1
 portBusqueda=50051
 portDescarga=50052
+rabiMQ = as
+rabitMQKey = jj
