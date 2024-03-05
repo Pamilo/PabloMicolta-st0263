@@ -1,10 +1,11 @@
 const amqp = require('amqplib');
+const jsonSelf = require('../self.json');
 
 async function connectRabbitMQ() {
   try {
-    const username = 'your_username';
-    const password = 'your_password';
-    const hostname = 'your_rabbitmq_hostname';
+    const username = jsonSelf.rabitMQUser;
+    const password = jsonSelf.rabitMQPassword;
+    const hostname = jsonSelf.rabiMQExchange;
     const connectionURL = `amqp://${username}:${password}@${hostname}`;
 
     const connection = await amqp.connect(connectionURL);
