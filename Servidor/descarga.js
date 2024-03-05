@@ -1,22 +1,40 @@
 const amqp = require('amqplib');
 const jsonSelf = require('../self.json');
 
-async function connectRabbitMQ() {
-  try {
-    const username = jsonSelf.rabitMQUser;
-    const password = jsonSelf.rabitMQPassword;
-    const hostname = jsonSelf.rabiMQExchange;
-    const connectionURL = `amqp://${username}:${password}@${hostname}`;
 
-    const connection = await amqp.connect(connectionURL);
+
+async function startServer() {
+  try {
+    const connection = await amqp.connect('amqp://localhost');
     const channel = await connection.createChannel();
 
-    // Do something with the channel, such as publishing or consuming messages
+    const exchangeName = 'my_exchange';
+    const queueName = 'my_queue';
 
-    await connection.close(); // Close the connection when done
+    // Declare exchange
+    await channel.assertExchange(exchangeName, 'direct');
+
+    // Declare queue
+    await channel.assertQueue(queueName);
+
+    // Bind queue to exchange
+    await channel.bindQueue(queueName, exchangeName, '');
+
+    console.log('MOM server started. Waiting for messages...');
+
+    // Consume messages
+    await channel.consume(queueName, (msg) => {
+      if (msg !== null) {
+        console.log('Received message:', msg.content.toString());
+        // Process the message here
+
+        // Acknowledge the message
+        channel.ack(msg);
+      }
+    });
   } catch (error) {
-    console.error('Error connecting to RabbitMQ:', error);
+    console.error('Error:', error.message);
   }
 }
 
-connectRabbitMQ();
+startServer();
