@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0csearch.proto\x12\x06search\"7\n\rsearchRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\t\"W\n\x0bsearchReply\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t\x12\x10\n\x08\x65xchange\x18\x04 \x01(\t\x12\x0b\n\x03key\x18\x05 \x01(\t2E\n\x06Search\x12;\n\x0bstartSearch\x12\x15.search.searchRequest\x1a\x13.search.searchReply\"\x00\x62\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0csearch.proto\x12\x06search\"V\n\rsearchRequest\x12\x0c\n\x04name\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\t\x12\x10\n\x08\x65xchange\x18\x04 \x01(\t\x12\x0b\n\x03key\x18\x05 \x01(\t\"8\n\x0bsearchReply\x12\x0f\n\x07message\x18\x01 \x01(\t\x12\n\n\x02ip\x18\x02 \x01(\t\x12\x0c\n\x04name\x18\x03 \x01(\t2E\n\x06Search\x12;\n\x0bstartSearch\x12\x15.search.searchRequest\x1a\x13.search.searchReply\"\x00\x62\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
@@ -22,8 +22,8 @@ _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'search_pb2', _globals)
 if _descriptor._USE_C_DESCRIPTORS == False:
   DESCRIPTOR._options = None
   _globals['_SEARCHREQUEST']._serialized_start=24
-  _globals['_SEARCHREQUEST']._serialized_end=79
-  _globals['_SEARCHREPLY']._serialized_start=81
+  _globals['_SEARCHREQUEST']._serialized_end=110
+  _globals['_SEARCHREPLY']._serialized_start=112
   _globals['_SEARCHREPLY']._serialized_end=168
   _globals['_SEARCH']._serialized_start=170
   _globals['_SEARCH']._serialized_end=239

@@ -8,9 +8,12 @@ message searchRequest {
   string name = 1;
   string ip = 2;
   string port = 3;
+  string exchange = 4;
+  string key = 5;
 }
 
 message searchReply {
   string message = 1;
   string ip = 2;
+  string name = 3;
 }

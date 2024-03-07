@@ -7,7 +7,6 @@ def cargar(fileName):
     fuente = fileName
     try:
         shutil.copyfile(fuente, destino)
-        print("File copied successfully!")
     except FileNotFoundError:
         print("Source file not found.")
     except PermissionError:

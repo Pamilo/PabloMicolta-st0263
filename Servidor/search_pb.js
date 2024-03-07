@@ -99,7 +99,9 @@ proto.search.searchRequest.toObject = function(includeInstance, msg) {
   var f, obj = {
     name: jspb.Message.getFieldWithDefault(msg, 1, ""),
     ip: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    port: jspb.Message.getFieldWithDefault(msg, 3, "")
+    port: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    exchange: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    key: jspb.Message.getFieldWithDefault(msg, 5, "")
   };
 
   if (includeInstance) {
@@ -148,6 +150,14 @@ proto.search.searchRequest.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setPort(value);
       break;
+    case 4:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setExchange(value);
+      break;
+    case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setKey(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -195,6 +205,20 @@ proto.search.searchRequest.serializeBinaryToWriter = function(message, writer) {
   if (f.length > 0) {
     writer.writeString(
       3,
+      f
+    );
+  }
+  f = message.getExchange();
+  if (f.length > 0) {
+    writer.writeString(
+      4,
+      f
+    );
+  }
+  f = message.getKey();
+  if (f.length > 0) {
+    writer.writeString(
+      5,
       f
     );
   }
@@ -255,6 +279,42 @@ proto.search.searchRequest.prototype.setPort = function(value) {
 };
 
 
+/**
+ * optional string exchange = 4;
+ * @return {string}
+ */
+proto.search.searchRequest.prototype.getExchange = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.search.searchRequest} returns this
+ */
+proto.search.searchRequest.prototype.setExchange = function(value) {
+  return jspb.Message.setProto3StringField(this, 4, value);
+};
+
+
+/**
+ * optional string key = 5;
+ * @return {string}
+ */
+proto.search.searchRequest.prototype.getKey = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.search.searchRequest} returns this
+ */
+proto.search.searchRequest.prototype.setKey = function(value) {
+  return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
 
 
 
@@ -288,7 +348,8 @@ proto.search.searchReply.prototype.toObject = function(opt_includeInstance) {
 proto.search.searchReply.toObject = function(includeInstance, msg) {
   var f, obj = {
     message: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    ip: jspb.Message.getFieldWithDefault(msg, 2, "")
+    ip: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    name: jspb.Message.getFieldWithDefault(msg, 3, "")
   };
 
   if (includeInstance) {
@@ -333,6 +394,10 @@ proto.search.searchReply.deserializeBinaryFromReader = function(msg, reader) {
       var value = /** @type {string} */ (reader.readString());
       msg.setIp(value);
       break;
+    case 3:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setName(value);
+      break;
     default:
       reader.skipField();
       break;
@@ -376,6 +441,13 @@ proto.search.searchReply.serializeBinaryToWriter = function(message, writer) {
       f
     );
   }
+  f = message.getName();
+  if (f.length > 0) {
+    writer.writeString(
+      3,
+      f
+    );
+  }
 };
 
 
@@ -412,6 +484,24 @@ proto.search.searchReply.prototype.getIp = function() {
  */
 proto.search.searchReply.prototype.setIp = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
+};
+
+
+/**
+ * optional string name = 3;
+ * @return {string}
+ */
+proto.search.searchReply.prototype.getName = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.search.searchReply} returns this
+ */
+proto.search.searchReply.prototype.setName = function(value) {
+  return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 

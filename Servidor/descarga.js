@@ -2,39 +2,23 @@ const amqp = require('amqplib');
 const jsonSelf = require('../self.json');
 
 
+module.exports = {
+  sendMessage:sendMessage
+}
+async function sendMessage(ip,key,exchange,que) {
+  const connection = await amqp.connect('amqp://user:password@'+ip+':5672');
+  const channel = await connection.createChannel();
 
-async function startServer() {
-  try {
-    const connection = await amqp.connect('amqp://localhost');
-    const channel = await connection.createChannel();
+  const exchangeName = exchange;
+  const routingKey = key;
+  const message = 'Enviando archivo pedido';
 
-    const exchangeName = 'my_exchange';
-    const queueName = 'my_queue';
+  await channel.assertExchange(exchangeName, 'direct', { durable: true });
+  channel.publish(exchangeName, routingKey, Buffer.from(message));
+  console.log("Running Producer Application...");
 
-    // Declare exchange
-    await channel.assertExchange(exchangeName, 'direct');
-
-    // Declare queue
-    await channel.assertQueue(queueName);
-
-    // Bind queue to exchange
-    await channel.bindQueue(queueName, exchangeName, '');
-
-    console.log('MOM server started. Waiting for messages...');
-
-    // Consume messages
-    await channel.consume(queueName, (msg) => {
-      if (msg !== null) {
-        console.log('Received message:', msg.content.toString());
-        // Process the message here
-
-        // Acknowledge the message
-        channel.ack(msg);
-      }
-    });
-  } catch (error) {
-    console.error('Error:', error.message);
-  }
+  setTimeout(() => {
+      connection.close();
+  }, 500); // Cerrar la conexión después de 500 ms (ajusta según tu necesidad)
 }
 
-startServer();

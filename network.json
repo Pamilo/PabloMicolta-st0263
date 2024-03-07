@@ -4,11 +4,5 @@
         "rabitMQ":"hh",
         "key":"hh",
         "status":"available"
-    },
-    {
-        "ip":"127.0.0.2",
-        "rabitMQ":"hh",
-        "key":"hh",
-        "status":"available"
     }
 ]

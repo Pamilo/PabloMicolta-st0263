@@ -1,12 +1,12 @@
 import requests
 import json
 import pika
+import searchResult
 
 with open('../network.json') as network:
     networkData = json.load(network)
 with open('../self.json') as me:
     meData = json.load(me)
-
 
 def sendInfoRequest():
     url = 'http://localhost:8000'  # Replace with the actual server URL
@@ -19,20 +19,16 @@ def sendInfoRequest():
     if response.status_code == 200:
         # Decode and print the response from the server
         response_data = json.loads(response.content)
-        print("Response from server:", response_data["ip"])
+        print("Response from server:", response_data.get("ip",""))
+        connection = pika.BlockingConnection(pika.ConnectionParameters(response_data.get("ip",""), 5672, '/',
+        pika.PlainCredentials(meData.get("rabitMQUser",""), meData.get("rabitMQPassword",""))))
+        channel = connection.channel()
+        def callback(ch, method, properties, body):
+            print(f'{body} is received')
+        channel.basic_consume(queue=meData["rabiMQQue"], on_message_callback=callback, auto_ack=True)
+        channel.start_consuming()
     else:
         print("Error:", response.status_code)
 
-def sendDownloadRequest():
-    connection = pika.BlockingConnection(pika.ConnectionParameters('127.0.0.1', 5672, '/',
-    pika.PlainCredentials(meData["rabitMQUser"], meData["rabitMQPassword"])))
-    channel = connection.channel()
-    nombreArchivo = 'ejemplo'
-    params = {'ip':meData["ip"],'archivo':nombreArchivo}
-    channel.basic_publish(exchange='my_exchange', routing_key='test', body=params)
-    print("Runnning Producer Application...")
-    connection.close()
-
-
 if __name__ == '__main__':
-    sendDownloadRequest()
+    sendInfoRequest()
