@@ -10,6 +10,7 @@ message searchRequest {
   string port = 3;
   string exchange = 4;
   string key = 5;
+  string que = 6;
 }
 
 message searchReply {

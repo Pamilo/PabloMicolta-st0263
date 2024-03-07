@@ -26,7 +26,7 @@ class Search:
                 stub = search_pb2_grpc.SearchStub(channel)
                 print(self.nombre_archivo)
                 response = stub.startSearch(search_pb2.searchRequest(name=self.nombre_archivo ,ip=meData["ip"],port=meData["portBusqueda"]
-                                                                    , exchange = meData["rabiMQExchange"],key = meData["rabitMQKey"]))
+                                                                    , exchange = meData["rabiMQExchange"],key = meData["rabitMQKey"],que=meData["rabitMQQue"]))
             print(response.ip)
             return response.ip
     def set_nombre_archivo(self,nombre_nuevo):
