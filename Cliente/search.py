@@ -28,6 +28,9 @@ class Search:
                 response = stub.startSearch(search_pb2.searchRequest(name=self.nombre_archivo ,ip=meData["ip"],port=meData["portBusqueda"]
                                                                     , exchange = meData["rabiMQExchange"],key = meData["rabitMQKey"],que=meData["rabitMQQue"]))
             print(response.ip)
-            return response.ip
+            if response.message == 'no encontrado':
+                return '256.256.256.256'
+            else:
+                return response.ip
     def set_nombre_archivo(self,nombre_nuevo):
         self.nombre_archivo = nombre_nuevo
