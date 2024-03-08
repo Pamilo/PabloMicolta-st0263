@@ -19,14 +19,15 @@ def sendInfoRequest():
     if response.status_code == 200:
         # Decode and print the response from the server
         response_data = json.loads(response.content)
-        if response_data.get("ip",""):
+        if response_data.get("ip","")=='256.256.256.256':
             print("Response from server:", response_data.get("ip",""))
-            connection = pika.BlockingConnection(pika.ConnectionParameters(response_data.get("ip",""), 5672, '/',
+            connection = pika.BlockingConnection(pika.ConnectionParameters(meData["ip"], 5672, '/',
             pika.PlainCredentials(meData.get("rabitMQUser",""), meData.get("rabitMQPassword",""))))
             channel = connection.channel()
             def callback(ch, method, properties, body):
                 print(f'{body} is received')
-            channel.basic_consume(queue=meData["rabiMQQue"], on_message_callback=callback, auto_ack=True)
+                channel.stop_consuming()
+            channel.basic_consume(queue=meData["rabitMQQue"], on_message_callback=callback, auto_ack=True)
             channel.start_consuming()
         else:
             print("error archivo no encontrado")

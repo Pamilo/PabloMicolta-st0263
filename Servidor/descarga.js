@@ -11,6 +11,8 @@ async function sendMessage(ip,key,exchange,que) {
 
   const exchangeName = exchange;
   const routingKey = key;
+  console.log(routingKey);
+  console.log(exchange);
   const message = 'Enviando archivo pedido';
 
   await channel.assertExchange(exchangeName, 'direct', { durable: true });
