@@ -33,9 +33,8 @@ asumiendo que se desplego el servidor lo unico que habria que hacer es ingresar 
 opcionalmente - si quiere mostrar resultados o pantallazos
 
 ## referencias:
-Se uso de base lostalleres presentados por el profesor
+Se uso de base los talleres presentados por el profesor
 
-<debemos siempre reconocer los créditos de partes del código que reutilizaremos, así como referencias a youtube, o referencias bibliográficas utilizadas para desarrollar el proyecto o la actividad>
 sitio1-https://stackoverflow.com/questions/34534178/rabbitmq-how-to-send-python-dictionary-between-python-producer-and-consumer
 
 sitio2-https://medium.com/@fullstacktips/how-to-search-for-a-specific-file-recursively-using-node-js-a6318d31f2fc
