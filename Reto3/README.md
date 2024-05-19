@@ -204,4 +204,4 @@ entrar a la carpeta NGINX y ejecutar el docker compose de la siguiente manera
 ## Fuentes
 Tutorial acerca de la instalacion de NFS: https://linuxize.com/post/how-to-install-and-configure-an-nfs-server-on-ubuntu-20-04/ 
 
-Video mostrando el funcionamiento de la aplicacion: https://eafit.sharepoint.com/sites/yo901/Documentos%20compartidos/General/Recordings/video-20240507_095730-Grabaci%C3%B3n%20de%20la%20reuni%C3%B3n.mp4?web=1 
+Video mostrando el funcionamiento de la aplicacion: https://youtu.be/QnpcZhUwv-Q 
